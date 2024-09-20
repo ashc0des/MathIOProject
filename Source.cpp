@@ -1,29 +1,34 @@
-// Adjust recipe to yield desired number of cookies
+// Calculate earned interest based on initial deposit and time
 
 #include <iostream>
+#include <iomanip>
+#include <string>
 using namespace std;
 
 int main()
 {
 	//setting up variables
-	int recipeCookies = 48;
-	double cupsSugarR, cupsButterR, cupsFlourR, cupsMod, cupsSugar, cupsButter, cupsFlour, userCookies;
-	cupsSugarR = 1.5;
-	cupsButterR = 1;
-	cupsFlourR = 2.75;
+	double principal, rate, time, amount, root, interest;
 
 	//getting input
-	cout << "How many cookies would you like to make?" << endl;
-	cin >> userCookies;
+	cout << "Please enter the original savings balance: ";
+	cin >> principal;
+	cout << "Please enter the interest rate: ";
+	cin >> rate;
+	cout << "Please enter the times per year the interest is compounded: ";
+	cin >> time;
 
 	//calculations
-	cupsMod = userCookies / recipeCookies;
-	cupsSugar = cupsSugarR * cupsMod;
-	cupsButter = cupsButterR * cupsMod;
-	cupsFlour = cupsFlourR * cupsMod;
+	rate = rate / 100;
+	root = 1 + (rate / time);
+	amount = principal * (pow(root, time));
+	interest = amount - principal;
+	rate = rate * 100; //resetting rate to percent value
 
-	//display adjusted recipe
-	cout << "You will need " << cupsSugar << " cups of sugar, " << cupsButter << " cups of butter, and " << cupsFlour << " cups of flour.";
-
-	return 0;
+	//output
+	cout << "Interest Rate: " << rate << "%" << endl;
+	cout << "Times Compounded: " << time << endl;
+	cout << "Principal: $" << principal << endl;
+	cout << "Interest: $" << setprecision(2) << fixed << interest << endl;
+	cout << "Amount in Savings: $" << amount;
 }
